@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 
-PROFILES = ("ACCURATE_GEN2", "ACCURATE_GEN1", "MEDIUM_GEN2", "MEDIUM_GEN1", "FAST_GEN1")
+ALL_PROFILES = ("ACCURATE_GEN2", "ACCURATE_GEN1", "MEDIUM_GEN2", "MEDIUM_GEN1", "FAST_GEN1")
 
 
 def build_replay(
@@ -90,7 +90,11 @@ def main() -> int:
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     if not summary.get("ranking") or not summary.get("selection"):
         parser.error("comparison summary must contain selection and ranking")
-    for profile in PROFILES:
+    requested_profiles = summary.get("sdk_comparison_profiles") or ALL_PROFILES
+    profiles = tuple(profile for profile in requested_profiles if profile in ALL_PROFILES)
+    if not profiles or len(profiles) != len(requested_profiles):
+        parser.error("comparison summary lists an empty or unknown model profile")
+    for profile in profiles:
         for filename in ("camera.json", "frames.csv", "bodies.csv"):
             if not (source / profile / filename).is_file():
                 parser.error(f"missing raw ZED export: {source / profile / filename}")
@@ -102,7 +106,7 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.mkdir()
     shutil.copytree(source / "shared_images", output / "shared_images")
-    for profile in PROFILES:
+    for profile in profiles:
         shutil.copytree(source / profile, output / profile)
     for filename in ("comparison_summary.csv", "comparison_summary.json", "selected_model.txt"):
         path = source / filename
@@ -112,7 +116,7 @@ def main() -> int:
         shutil.copy2(path, output / path.name)
 
     selected_profile = summary["selection"]["profile"]
-    if selected_profile not in PROFILES:
+    if selected_profile not in profiles:
         parser.error(f"unknown selected profile in summary: {selected_profile}")
     selected_dir = output / "selected"
     selected_dir.mkdir()
@@ -120,7 +124,7 @@ def main() -> int:
         shutil.copy2(output / selected_profile / filename, selected_dir / filename)
 
     builder = Path(__file__).with_name("build_group001_replay.py")
-    for folder in [*(output / profile for profile in PROFILES), selected_dir]:
+    for folder in [*(output / profile for profile in profiles), selected_dir]:
         build_replay(
             builder,
             folder,

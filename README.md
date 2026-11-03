@@ -7,7 +7,7 @@ kaiseki1103/                         # Ubuntuプロジェクト
   analyze_lidar.py                  # MCAP / LiDAR解析
   analyze_zed_corridor.py           # 深度点から廊下座標系を推定
   build_group001_replay.py           # 骨格を廊下座標へ変換し同期再生を生成
-  process_zed_model_comparison.py   # 複数モデル比較の受信データを処理
+  process_zed_model_comparison.py   # 1モデルまたは複数モデルの受信データを処理
   process_group001_batch.py         # group001の複数録画をまとめて処理
   group001_replay_template.html
   experiment_metadata/                # group/trial schedule snapshot for result labeling
@@ -32,6 +32,8 @@ kaiseki1103/                         # Ubuntuプロジェクト
 - `results/recording_001/model_comparison_20261103/selected/index.html`
 
 選択結果はACCURATE_GEN2です。信頼骨格242件で5モデル中最多でした。軌跡CSVは同フォルダーおよび各モデルのサブフォルダーにあります。校正はLiDARとZEDが同じ廊下境界を観測したと仮定する暫定値です。
+
+録画001〜048の全録画比較の集計は [`results/group001_model_comparison_summary_20261103.md`](results/group001_model_comparison_summary_20261103.md)、録画別の数値は [`results/group001_model_comparison_summary_20261103.csv`](results/group001_model_comparison_summary_20261103.csv) にあります。次回group001を解析するときは `ACCURATE_GEN2` 1種類を推奨します。
 
 録画番号と実験条件を対応付ける場合は [`experiment_metadata/run_order_20261103.json`](experiment_metadata/run_order_20261103.json) を参照します。これは録画用プロジェクトからコピーした条件表スナップショットで、解析コードは録画プロジェクト内のスクリプトに依存しません。
 
@@ -79,6 +81,8 @@ python3 process_zed_model_comparison.py \
 ```
 
 Ubuntu側で各モデルの骨格をカメラ基準の廊下X/Y/Zへ変換し、モデル比較ページと録画・骨格・軌跡の同期リプレイを生成します。Windows側はSVOからSDK依存のデータを書き出し、Ubuntu側はそれを受け取って解析・可視化します。
+
+5モデル比較を行わず1種類に絞る場合は、Windows側コマンドに `--profile ACCURATE_GEN2` を追加します。単一プロファイルの結果も同じ処理コマンドで再生ページ化できます。
 
 ### 4. group001の録画002〜048をまとめて解析
 
