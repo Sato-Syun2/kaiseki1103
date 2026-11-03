@@ -1,0 +1,28 @@
+{
+  "method": "match ZED-visible far wall to far LiDAR wall; infer camera-side wall and lateral sensor offset from common wall gap and floor height",
+  "provisional": true,
+  "corridor_frame": {
+    "origin": "ZED optical-center projection onto floor",
+    "X": "hallway direction, camera at X=0; lidar X offset unresolved",
+    "Y": "from the camera-side wall toward the ZED-visible far wall",
+    "Z": "up"
+  },
+  "zed_visible_wall_Y_m": 2.185088215453171,
+  "lidar_wall_gap_m": 2.370818689095859,
+  "inferred_opposite_wall_Y_m": -0.18573047364268813,
+  "lidar_origin_position_in_corridor_m": {
+    "X": null,
+    "Y": -0.07651850810744662,
+    "Z": -0.012716684466705708
+  },
+  "zed_camera_height_above_floor_m": 2.0977166844667465,
+  "lidar_height_above_floor_m": 2.085000000000041,
+  "lidar_near_wall_distance_m": 0.10921196553524151,
+  "lidar_far_wall_distance_m": 2.261606723560617,
+  "assumptions": [
+    "ZED wall and LiDAR far wall are the same physical wall.",
+    "LiDAR near wall and inferred camera-side wall are the same boundary.",
+    "Both plane fits refer to the same straight corridor cross section."
+  ],
+  "limitation": "Parallel side walls and the floor do not constrain the LiDAR-camera translation along X."
+}

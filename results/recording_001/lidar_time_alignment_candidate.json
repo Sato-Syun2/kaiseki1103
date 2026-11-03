@@ -1,0 +1,13 @@
+{
+  "recording": "2026-11-02/group001/recording_001",
+  "camera_first_image_timestamp_ns": 1793592314952407000,
+  "lidar_first_pointcloud_header_timestamp_ns": 1793592313034174118,
+  "lidar_first_pointcloud_mcap_record_timestamp_ns": 1793592313137425192,
+  "lidar_mcap_start_timestamp_ns": 1793592313132906002,
+  "camera_first_after_lidar_header_first_s": 1.918232882,
+  "camera_first_after_lidar_mcap_start_s": 1.819500998,
+  "median_record_minus_header_s": 0.10230218,
+  "lidar_pointcloud_frames": 186,
+  "method": "SVO TIME_REFERENCE.IMAGE timestamps compared with PointCloud2 header stamps and MCAP record timestamps",
+  "note": "Use each LiDAR PointCloud2 header stamp for sensor-time synchronization. MCAP record timestamps are about 0.1023 s later in this bag."
+}

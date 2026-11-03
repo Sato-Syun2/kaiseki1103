@@ -1,0 +1,22 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Raw sensor recordings and depth point exports
+*.svo
+*.svo2
+*.mcap
+*.npz
+
+# Person-specific ZED exports and generated playback pages
+results/**/bodies.csv
+results/**/camera.json
+results/**/frames.csv
+results/**/corridor_trajectories.csv
+results/**/corridor_trajectories.json
+results/**/index.html
+results/**/images/
+results/**/shared_images/
+results/**/*.log

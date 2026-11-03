@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Group 001 recording 001｜歩行経路リプレイ</title>
+<style>
+:root{color-scheme:light;--ink:#183143;--muted:#587083;--line:#d4e0e8;--panel:#fff;--bg:#edf3f7;--blue:#145b91}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,"Yu Gothic UI",sans-serif}main{max-width:1500px;margin:auto;padding:22px}h1{font-size:25px;margin:0 0 5px}h2{font-size:18px;margin:0 0 12px}.subtitle{color:var(--muted);margin:0 0 16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 8px #14324a0b}.notice{padding:12px 14px;background:#fff3d9;border-left:4px solid #d59429;line-height:1.6}.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}button,select{font:inherit;border:1px solid #b7cad8;border-radius:7px;background:#fff;padding:7px 12px;color:var(--ink);cursor:pointer}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}input[type=range]{accent-color:var(--blue)}#slider{width:100%;margin:16px 0 4px}.clock{font-variant-numeric:tabular-nums;font-weight:700}.grid{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;align-items:start}.canvas{width:100%;display:block;background:#f6f9fb;border-radius:8px}.videoWrap{position:relative;width:100%;aspect-ratio:16/9;background:#17212b;border-radius:8px;overflow:hidden}.videoWrap img,.videoWrap canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.small{font-size:13px;line-height:1.6;color:var(--muted)}.legend{display:flex;gap:18px;flex-wrap:wrap}.legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--c)}.readout{min-height:42px;line-height:1.8}.personList{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}.person{padding:10px;border:1px solid var(--line);border-radius:8px;border-left:5px solid var(--c)}.person strong{display:block;color:var(--c)}code{background:#edf3f7;padding:2px 4px}@media(max-width:950px){main{padding:12px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>廊下内の歩行経路を再生</h1>
+<p class="subtitle" id="subtitle"></p>
+<div class="card notice" id="calibrationNote"></div>
+<section class="card">
+  <div class="controls">
+    <button id="play" class="primary">▶ 再生</button>
+    <button id="prev">前のフレーム</button><button id="next">次のフレーム</button>
+    <select id="rate"><option value="0.25">0.25倍</option><option value="0.5">0.5倍</option><option value="1" selected>1倍</option><option value="2">2倍</option></select>
+    <strong id="clock" class="clock"></strong>
+    <label><input id="loop" type="checkbox" checked> 繰り返す</label>
+  </div>
+  <input id="slider" type="range" min="0" max="1" step="0.01" value="0">
+  <div id="readout" class="readout"></div>
+</section>
+<div class="grid">
+  <section class="card"><h2>録画映像とZED BODY_34</h2>
+    <div class="videoWrap"><img id="videoFrame" alt="録画フレーム"><canvas id="videoOverlay"></canvas></div>
+    <p id="videoTime" class="small"></p>
+    <div class="controls"><label>関節信頼度 <input id="threshold" type="range" min="0" max="100" value="20"><span id="thresholdValue"></span></label><label><input id="skeletonToggle" type="checkbox" checked> 骨格を重ねる</label></div>
+    <p class="small">映像はSVOから約0.1秒間隔で書き出した画像を時刻同期して再生します。軌跡と骨格表示は、tracking_state=OK かつ骨盤信頼度20%以上の検出を使います。未検出区間の座標は補間しません。</p>
+  </section>
+  <section class="card"><h2>廊下内の3D位置と歩行軌跡</h2>
+    <canvas id="scene" class="canvas" width="1000" height="560"></canvas>
+    <div class="legend" id="legend"></div>
+    <p class="small">廊下軸はX、横方向はY、高さはZ [m]。カメラ床面投影をX=0,Y=0、床をZ=0とします。人物IDごとの骨盤位置を表示します。Y&gt;0のZED可視壁側は画面左、カメラ側のY&lt;0の壁は画面右に表示します。壁の高さは概略表示です。</p>
+  </section>
+</div>
+<section class="card"><h2>上から見た歩行経路</h2>
+  <canvas id="plan" class="canvas" width="1100" height="410"></canvas>
+  <p class="small">実線は各人物の検出点を結んだ経路です。検出が0.4秒以上空いた区間は線を切ります。赤線はZEDで検出した壁、破線はLiDAR壁間隔から推定した反対側の壁です。</p>
+</section>
+<section class="card"><h2>検出データ</h2><div id="people" class="personList"></div>
+  <p class="small">座標校正は recording_001 のZED深度で見つけた壁・床平面と、LiDARから求めた廊下幅を使う暫定値です。LiDARとカメラの廊下長手方向の相対位置は、側壁と床だけでは決まりません。軌跡はZEDカメラ基準で表示しています。</p>
+</section>
+</main>
+<script id="replayData" type="application/json">__REPLAY_DATA__</script>
+<script>
+'use strict';
+const D=JSON.parse(document.getElementById('replayData').textContent);
+const $=id=>document.getElementById(id), names=D.camera.keypoint_names;
+const colors=new Map(D.tracks.map(t=>[t.id,t.color]));
+const bones=[[0,1],[1,2],[2,4],[4,5],[5,6],[6,7],[7,8],[8,9],[7,10],[2,11],[11,12],[12,13],[13,14],[14,15],[15,16],[14,17],[0,18],[18,19],[19,20],[20,21],[0,22],[22,23],[23,24],[24,25],[2,3],[3,26],[26,27],[27,28],[28,29],[27,30],[30,31],[20,32],[24,33],[32,21],[33,25]];
+const peopleBySample=new Map();for(const b of D.body_observations){if(!peopleBySample.has(b.sample_index))peopleBySample.set(b.sample_index,[]);peopleBySample.get(b.sample_index).push(b)}
+let time=0,playing=false,lastTick=0,currentFrame=-1;
+const img=$('videoFrame'),vc=$('videoOverlay'),vctx=vc.getContext('2d');
+$('subtitle').textContent=`2026-11-02 / group001 / recording001 · ${D.camera.sdk_version} · ${D.camera.body_format} · ${D.frames.length}枚の同期画像`;
+const lidarPose=D.corridor.sensor_alignment.lidar_position_in_camera_corridor_m;
+$('calibrationNote').textContent=`校正候補：カメラ高さ ${D.corridor.camera_height_m.toFixed(2)} m、LiDAR由来の壁間隔 ${D.corridor.wall_gap_m_from_lidar.toFixed(2)} m。LiDAR原点はカメラ基準でY≈${lidarPose.Y.toFixed(2)} m、Z≈${lidarPose.Z.toFixed(2)} m、Xは未確定です。Xはカメラから廊下奥が正、歩行者がカメラへ近づくとXが小さくなります。`;
+$('slider').max=D.duration_s;$('slider').step=Math.min(.05,D.frames.length>1?D.frames[1].t-D.frames[0].t:.1);
+const peopleBox=$('people');
+for(const tr of D.tracks){const div=document.createElement('div');div.className='person';div.style.setProperty('--c',tr.color);div.innerHTML=`<strong>${tr.label}</strong><span>${tr.points.length}点 / X ${Math.min(...tr.points.map(p=>p.x)).toFixed(2)}〜${Math.max(...tr.points.map(p=>p.x)).toFixed(2)} m</span>`;peopleBox.appendChild(div);const leg=document.createElement('span');leg.style.setProperty('--c',tr.color);leg.textContent=tr.label;$('legend').appendChild(leg)}
+function nearestFrame(t){let lo=0,hi=D.frames.length;while(lo<hi){const m=(lo+hi)>>1;if(D.frames[m].t<t)lo=m+1;else hi=m}if(lo<=0)return 0;if(lo>=D.frames.length)return D.frames.length-1;return Math.abs(D.frames[lo].t-t)<Math.abs(D.frames[lo-1].t-t)?lo:lo-1}
+function activeBodies(){const f=D.frames[nearestFrame(time)];if(Math.abs(f.t-time)>.16)return [];return (peopleBySample.get(f.sample_index)||[]).filter(usablePoint)}
+function usablePoint(b){return b.root_valid&&b.joints[0]&&b.joints[0].every(Number.isFinite)}
+function updateImage(){const i=nearestFrame(time);if(i!==currentFrame){currentFrame=i;img.src=D.frames[i].image;img.onload=drawVideo}drawVideo()}
+function drawVideo(){if(!img.naturalWidth)return;const w=D.camera.width,h=D.camera.height;if(vc.width!==w||vc.height!==h){vc.width=w;vc.height=h}vctx.clearRect(0,0,w,h);if(!$('skeletonToggle').checked)return;const bodies=activeBodies(),threshold=Number($('threshold').value),s=threshold/100;
+ for(const b of bodies){const color=colors.get(b.id)||'#e7af27';for(const [a,c] of bones){const p=b.pixels[a],q=b.pixels[c],ca=b.joint_confidence[a],cc=b.joint_confidence[c];if(!p||!q||p[0]===null||q[0]===null||ca===null||cc===null||Math.min(ca,cc)<threshold)continue;vctx.strokeStyle=color;vctx.lineWidth=3;vctx.beginPath();vctx.moveTo(p[0],p[1]);vctx.lineTo(q[0],q[1]);vctx.stroke()}const p=b.pixels[0];if(p&&p[0]!==null){vctx.fillStyle=color;vctx.font='bold 20px system-ui';vctx.fillText(`ID ${b.id}`,p[0]+10,p[1]-10)}}
+}
+function drawPlan(){const c=$('plan'),ctx=c.getContext('2d'),W=c.width,H=c.height;ctx.clearRect(0,0,W,H);const xmin=D.corridor.x_bounds_m[0],xmax=D.corridor.x_bounds_m[1],ya=D.corridor.wall_y_m[0],yb=D.corridor.wall_y_m[1],ymin=ya-.28,ymax=yb+.28,m=56;const scale=Math.min((W-2*m)/(xmax-xmin),(H-2*m)/(ymax-ymin));const px=x=>m+(x-xmin)*scale,py=y=>H-m-(y-ymin)*scale;
+ ctx.fillStyle='#edf3f6';ctx.fillRect(px(xmin),py(yb),px(xmax)-px(xmin),py(ya)-py(yb));ctx.strokeStyle='#a6bac8';ctx.lineWidth=2;for(let x=Math.ceil(xmin);x<=xmax;x+=1){ctx.beginPath();ctx.moveTo(px(x),py(yb));ctx.lineTo(px(x),py(ya));ctx.stroke();if(x%2===0){ctx.fillStyle='#526c7f';ctx.font='12px system-ui';ctx.fillText(String(x),px(x)-4,H-16)}}
+ ctx.setLineDash([8,6]);ctx.strokeStyle='#bd6b24';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(px(xmin),py(ya));ctx.lineTo(px(xmax),py(ya));ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle='#a33c33';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(px(xmin),py(yb));ctx.lineTo(px(xmax),py(yb));ctx.stroke();ctx.fillStyle='#415a6b';ctx.font='14px system-ui';ctx.fillText('camera X=0',px(0)+5,py(0)-8);
+ for(const tr of D.tracks){ctx.strokeStyle=tr.color;ctx.lineWidth=3;ctx.beginPath();let on=false,prev=null;for(const p of tr.points){if(p.t>time)break;if(prev&&p.t-prev.t>.4)on=false;if(!on){ctx.moveTo(px(p.x),py(p.y));on=true}else ctx.lineTo(px(p.x),py(p.y));prev=p}ctx.stroke();const p=[...tr.points].reverse().find(q=>q.t<=time);if(p){ctx.fillStyle=tr.color;ctx.beginPath();ctx.arc(px(p.x),py(p.y),7,0,Math.PI*2);ctx.fill();ctx.fillText(`ID ${tr.id}`,px(p.x)+8,py(p.y)-8)}}
+ ctx.fillStyle='#263c4d';ctx.font='14px system-ui';ctx.fillText('X: カメラから廊下奥 [m] →',W/2-95,H-5);ctx.save();ctx.translate(18,H/2+20);ctx.rotate(-Math.PI/2);ctx.fillText('Y [m]',0,0);ctx.restore();const cam=activeBodies().filter(usablePoint);if(cam.length){ctx.fillStyle='#17364c';ctx.beginPath();ctx.arc(px(0),py(0),5,0,Math.PI*2);ctx.fill()}}
+function projection(){const W=1000,H=560,xmin=D.corridor.x_bounds_m[0],xmax=D.corridor.x_bounds_m[1],ya=D.corridor.wall_y_m[0],yb=D.corridor.wall_y_m[1],span=xmax-xmin;const scale=Math.min(800/(span+2),330/(span*.40+2.7));const cx=(xmin+xmax)/2,cy=(ya+yb)/2;return p=>[W/2+(p[0]-cx)*scale-(p[1]-cy)*scale*.42,H*.76-(p[0]-cx)*scale*.25-(p[1]-cy)*scale*.35-p[2]*scale]}
+function line(ctx,P,a,b,color,width=1,dash=[]){const p=P(a),q=P(b);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.setLineDash(dash);ctx.beginPath();ctx.moveTo(...p);ctx.lineTo(...q);ctx.stroke();ctx.setLineDash([])}
+function drawScene(){const c=$('scene'),ctx=c.getContext('2d'),P=projection(),xmin=D.corridor.x_bounds_m[0],xmax=D.corridor.x_bounds_m[1],[ya,yb]=D.corridor.wall_y_m;ctx.clearRect(0,0,c.width,c.height);const floor=[[xmin,ya,0],[xmax,ya,0],[xmax,yb,0],[xmin,yb,0]].map(P);ctx.fillStyle='#e5eef3';ctx.beginPath();ctx.moveTo(...floor[0]);floor.slice(1).forEach(p=>ctx.lineTo(...p));ctx.closePath();ctx.fill();
+ for(let x=Math.ceil(xmin);x<=xmax;x++){line(ctx,P,[x,ya,0],[x,yb,0],'#c7d7e1',1)}for(const y of [ya,yb]){line(ctx,P,[xmin,y,0],[xmax,y,0],'#718fa3',2);line(ctx,P,[xmin,y,2.2],[xmax,y,2.2],'#c4d4de',1);for(let x=Math.ceil(xmin);x<=xmax;x+=3)line(ctx,P,[x,y,0],[x,y,2.2],'#c4d4de',1)}
+ for(const tr of D.tracks){let prev=null;ctx.strokeStyle=tr.color;ctx.lineWidth=3;ctx.beginPath();for(const p of tr.points){if(p.t>time)break;if(prev&&p.t-prev.t>.4){ctx.stroke();ctx.beginPath();prev=null}const q=P([p.x,p.y,.05]);if(!prev)ctx.moveTo(...q);else ctx.lineTo(...q);prev=p}ctx.stroke()}
+ for(const b of activeBodies()){if(!$('skeletonToggle').checked)continue;const color=colors.get(b.id)||'#e7af27';for(const [a,q] of bones){const p0=b.joints[a],p1=b.joints[q],c0=b.joint_confidence[a],c1=b.joint_confidence[q];if(!p0||!p1||c0===null||c1===null||Math.min(c0,c1)<Number($('threshold').value))continue;line(ctx,P,p0,p1,color,4)}const root=b.joints[0];if(root){const p=P(root);ctx.fillStyle=color;ctx.beginPath();ctx.arc(...p,5,0,Math.PI*2);ctx.fill();ctx.font='bold 14px system-ui';ctx.fillText(`ID ${b.id}`,p[0]+7,p[1]-7)}}
+ ctx.fillStyle='#435f72';ctx.font='14px system-ui';ctx.fillText('Z up',20,25);ctx.fillText('camera X=0',P([0,0,0])[0]+6,P([0,0,0])[1]-8)}
+function render(){time=Math.max(0,Math.min(D.duration_s,time));$('slider').value=time;$('clock').textContent=`${time.toFixed(2)} / ${D.duration_s.toFixed(2)} s`;$('thresholdValue').textContent=`${$('threshold').value}`;const bodies=activeBodies();const lines=[];for(const b of bodies){const p=b.joints[0];if(usablePoint(b))lines.push(`人 ID ${b.id}: X=${p[0].toFixed(2)} m, Y=${p[1].toFixed(2)} m, 状態=${b.state}`);else lines.push(`人 ID ${b.id}: 座標未確定（${b.state}）`)}$('readout').textContent=lines.length?lines.join('　｜　'):'この時刻に有効な人物検出はありません。欠測位置は保持・補間しません。';$('videoTime').textContent=`画像 ${D.frames[nearestFrame(time)].t.toFixed(3)} 秒 ／ 再生時刻 ${time.toFixed(3)} 秒`;$('slider').value=time;updateImage();drawPlan();drawScene()}
+$('play').onclick=()=>{playing=!playing;lastTick=performance.now();$('play').textContent=playing?'Ⅱ 停止':'▶ 再生'};$('slider').oninput=e=>{time=Number(e.target.value);render()};$('prev').onclick=()=>{const i=Math.max(0,nearestFrame(time)-1);time=D.frames[i].t;render()};$('next').onclick=()=>{const i=Math.min(D.frames.length-1,nearestFrame(time)+1);time=D.frames[i].t;render()};$('rate').onchange=render;$('loop').onchange=render;$('threshold').oninput=render;$('skeletonToggle').onchange=render;window.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();$('play').click()}else if(e.code==='ArrowRight')$('next').click();else if(e.code==='ArrowLeft')$('prev').click()});
+function tick(now){if(playing){time+=(now-lastTick)/1000*Number($('rate').value);lastTick=now;if(time>D.duration_s){if($('loop').checked)time=0;else{time=D.duration_s;playing=false;$('play').textContent='▶ 再生'}}render()}requestAnimationFrame(tick)}
+render();requestAnimationFrame(tick);
+</script>
+</body>
+</html>
