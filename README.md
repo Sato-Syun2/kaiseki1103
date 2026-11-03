@@ -35,6 +35,8 @@ kaiseki1103/                         # Ubuntuプロジェクト
 
 録画001〜048の全録画比較の集計は [`results/group001_model_comparison_summary_20261103.md`](results/group001_model_comparison_summary_20261103.md)、録画別の数値は [`results/group001_model_comparison_summary_20261103.csv`](results/group001_model_comparison_summary_20261103.csv) にあります。次回group001を解析するときは `ACCURATE_GEN2` 1種類を推奨します。
 
+全録画の再生リンク一覧は、ローカル生成HTML `results/group001_model_comparison_overview_20261103.html` です。各録画の比較ページから5モデルの再生ページと採用モデルの再生ページを開けます。
+
 録画番号と実験条件を対応付ける場合は [`experiment_metadata/run_order_20261103.json`](experiment_metadata/run_order_20261103.json) を参照します。これは録画用プロジェクトからコピーした条件表スナップショットで、解析コードは録画プロジェクト内のスクリプトに依存しません。
 
 ## 解析手順

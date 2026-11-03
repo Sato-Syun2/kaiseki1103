@@ -20,3 +20,5 @@ results/**/index.html
 results/**/images/
 results/**/shared_images/
 results/**/*.log
+results/group001_model_comparison_overview_*.html
+results/recording_*/model_comparison_*/
