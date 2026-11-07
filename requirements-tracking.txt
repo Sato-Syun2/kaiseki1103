@@ -1,0 +1,6 @@
+# CPU analysis only. Keep the Windows pyzed environment compatible with its SDK.
+# Verified environment versions are saved in results/tracking_v2/environment_20261104.json.
+numpy>=1.26,<3
+opencv-python>=4.8,<6
+Pillow>=10,<13
+pytest>=7,<10

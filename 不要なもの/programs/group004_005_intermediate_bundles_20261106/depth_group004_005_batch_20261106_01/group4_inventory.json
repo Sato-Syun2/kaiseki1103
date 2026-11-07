@@ -1,0 +1,372 @@
+[
+  {
+    "group": "4",
+    "recording": "recording_001",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_001\\recording_001.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "cb192e3eb0f386a29035dadbbc3c27646de056a00c4f8157bd1db3c2ce2f928d",
+    "frame_count": "420",
+    "body_manifest_sha256": "89bb2c131198e2e3a31f6d0f329216157ec56337095758ed7e12573d39cfafe0",
+    "timeline": "timelines/g004_recording_001.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_002",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_002\\recording_002.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "193e3e83e4ca7bf09882034ec324ee61e2ad976e119a9833df3b11d2cb64e483",
+    "frame_count": "357",
+    "body_manifest_sha256": "7974ac3b8bbabb5f3b628626c042111cc6886a91b89273a094aeb3880534251f",
+    "timeline": "timelines/g004_recording_002.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_003",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_003\\recording_003.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "bd8b08469d1db7a5d1914c15707091fa7fed0e9c2ceaa41d4d28e0b55e78db93",
+    "frame_count": "446",
+    "body_manifest_sha256": "f8eddcfc63962d9d0b37cb47c42838450831a8f4c41f181671e0c8aa8261aaa2",
+    "timeline": "timelines/g004_recording_003.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_004",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_004\\recording_004.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "d1c4854b17d4329e95b47e6a345f5169d37a52ba73bf4bd16b729d2296a7eb2b",
+    "frame_count": "391",
+    "body_manifest_sha256": "8d1ab11502b930e94d3b108884bedf03a924a2550d488df511ad7e431200806a",
+    "timeline": "timelines/g004_recording_004.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_005",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_005\\recording_005.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "896520e08f96a65e4919a654e56070f508ce8f4b1843eff127515aead83d42b1",
+    "frame_count": "405",
+    "body_manifest_sha256": "2ba4391d7856025ce14cc6708d2542e8ec81e0e5af7f4b1ca4c24d6215b0e6bb",
+    "timeline": "timelines/g004_recording_005.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_006",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_006\\recording_006.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "95531b56078d48fdeab8a487b0b33340d544a4d8712ac8052984ee31c6297bd6",
+    "frame_count": "352",
+    "body_manifest_sha256": "4511849de874ae9bc929527bb19e45827968800618fec0b6c0f56bf40e4e38cb",
+    "timeline": "timelines/g004_recording_006.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_007",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_007\\recording_007.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "ef5d1632d912be510990f654881a8de6c2841a69bd617a63a4d0c396c2b7568c",
+    "frame_count": "398",
+    "body_manifest_sha256": "9183e597e1b07fa9c04cabd0a55ebdea89f28494ed268ab05b1b2dd20246e76b",
+    "timeline": "timelines/g004_recording_007.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_008",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_008\\recording_008.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "c7f43c769dfdc6fac85f8018690a481ea0697d30be4b65310945926f03abbf3a",
+    "frame_count": "302",
+    "body_manifest_sha256": "875f53768fcb68028d1d6ec7c5e52dcd34279665b7694383e0516a6eb17a86c7",
+    "timeline": "timelines/g004_recording_008.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_009",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_009\\recording_009.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "b42c630c50da1c78bc992a8fadbaaa539d8027f7c26a90d03a17d5d970d9c8fc",
+    "frame_count": "370",
+    "body_manifest_sha256": "e74a1242fae7d6a9ff27557d4d14181022f8561ab09b673aca465dd8e735a8ef",
+    "timeline": "timelines/g004_recording_009.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_010",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_010\\recording_010.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "9583309403fe83f4799192daf25f6f03d2eab20125be9337f79302cd00a40a05",
+    "frame_count": "398",
+    "body_manifest_sha256": "9a1831c20c5e45e660c0d0547403cfe6554f15b856db1f9f413903b12dc6e1e5",
+    "timeline": "timelines/g004_recording_010.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_011",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_011\\recording_011.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "8bf5d2f04aeba46c470db3e30b0265871f57cacff968b13331188de3abbb4eec",
+    "frame_count": "422",
+    "body_manifest_sha256": "4f4eb1db107b64c3b605de0bfcf3c919d4304d41283244f24c5c37a3e60b50e4",
+    "timeline": "timelines/g004_recording_011.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_012",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_012\\recording_012.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "29f1108621cd877281b7a4232c7901ec2dd5a20f15b1e16039fea933f76a4e55",
+    "frame_count": "472",
+    "body_manifest_sha256": "2f6385bbeb554f081852bfe02a1d6ac2065f800266f990d9c1273cfc54f4994f",
+    "timeline": "timelines/g004_recording_012.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_013",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_013\\recording_013.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "44a60d95411c06a6c496c95669536fb1d8e6825ce657bff4b4688c996ad5bba4",
+    "frame_count": "425",
+    "body_manifest_sha256": "e7cd7feeab2432a4cb13832796dd5d72c293ec7f4ed9288b7c2951bea25351c9",
+    "timeline": "timelines/g004_recording_013.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_014",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_014\\recording_014.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "3756c6457b47073e4029f29f959774d3e72d93dd858e67c1869946491f8621c9",
+    "frame_count": "385",
+    "body_manifest_sha256": "5ead4293d85214c938b6b31b3336307fadbfe29f4296819f6d56cfdbdd9d3cbd",
+    "timeline": "timelines/g004_recording_014.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_015",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_015\\recording_015.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "921e92805b5140ec518ab1c62c88ac227d08bbe7997932f7b300dd1c88fd264a",
+    "frame_count": "479",
+    "body_manifest_sha256": "53f14256bfae956494f2a315cf0c969e470278c3f8b0d4729e53a15f83960c13",
+    "timeline": "timelines/g004_recording_015.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_016",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_016\\recording_016.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "bf9530e438f8b90098ad75386aa60aa984248d7bc94e565e8af0b842c8401958",
+    "frame_count": "417",
+    "body_manifest_sha256": "46c847236cd2257798cfb3a1a531ff45955a75fd280ced1bf3957d3307b351ed",
+    "timeline": "timelines/g004_recording_016.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_017",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_017\\recording_017.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "d8d83c8246a9400382d3fa73f58ade20c6d4a213bf4f3822eb8fd273b29207f7",
+    "frame_count": "437",
+    "body_manifest_sha256": "17aa3a746ee5f43b673456b5e2bc2c372620649474a9824f4e1174dcbd91a698",
+    "timeline": "timelines/g004_recording_017.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_018",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_018\\recording_018.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "aaea63f1ba66f914a213c357e5d8f776d0bba56df7b09b1a7ce6891c92e6fc00",
+    "frame_count": "446",
+    "body_manifest_sha256": "ad0bc5c300fb4e1b0fa2d558f15c129b7be1687c852b25d767b3f72e3f6f49bc",
+    "timeline": "timelines/g004_recording_018.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_019",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_019\\recording_019.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "30fbe249d54888714964f189a480e5a401561b651382420c0c765271a16cdd38",
+    "frame_count": "388",
+    "body_manifest_sha256": "845adce69361575c5047095cf9e11deb9475bd64ae7dba5b096ecf37e5ba0476",
+    "timeline": "timelines/g004_recording_019.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_020",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_020\\recording_020.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "86c059a1529605d3493a0f9a73db48bc3b3b63959514342a515d42ca0ee65dd8",
+    "frame_count": "344",
+    "body_manifest_sha256": "245baede212ab1a4ccd0dfcbbaddf77d4db1aa34efaa86e314a67ca502c02e54",
+    "timeline": "timelines/g004_recording_020.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_021",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_021\\recording_021.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "5ee04c5dc445f9edf17dc174251c4149b84c9840b27e4acd35f6f72184882387",
+    "frame_count": "412",
+    "body_manifest_sha256": "20928493cf62baa0fa8d5597d85748b10053e5517b1719570e0f1602cdafd31d",
+    "timeline": "timelines/g004_recording_021.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_022",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_022\\recording_022.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "1b698afde6910be418e0baae8d8c087e217a1f92a41bc9f97233303945e418e4",
+    "frame_count": "367",
+    "body_manifest_sha256": "26a5c4dc264a14e22e5bca09cf2426cd23c550e63857623cc9f7572f2de75a42",
+    "timeline": "timelines/g004_recording_022.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_023",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_023\\recording_023.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "e77f89371607376a4c0a48e7de3b36f7a8ff3ab4e3e2efd4bea043cdbbaea16c",
+    "frame_count": "395",
+    "body_manifest_sha256": "44058165fc92590665b2d0f3e6006af6f65fb1e5bafd52f9c679db47109840b3",
+    "timeline": "timelines/g004_recording_023.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_024",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_024\\recording_024.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "2b8964161221a026f665a5d646b790bbcd589de5367b6901c08011d7c546fc1a",
+    "frame_count": "355",
+    "body_manifest_sha256": "e0e85afc3926122ff1af1bde275927571925586316f1d786d75f4f64bb7bc6bb",
+    "timeline": "timelines/g004_recording_024.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_025",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_025\\recording_025.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "864c0a8556efa11217a2789b228f0d51cf027103ae7d03437a5ea6023339bc0f",
+    "frame_count": "385",
+    "body_manifest_sha256": "e63ecd5836643001163e1afee08cf8c06e75ce5795da056f9ac03a70d1950483",
+    "timeline": "timelines/g004_recording_025.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_026",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_026\\recording_026.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "fb55a794a59f4b5104ccbb07d0a7ede535a59fd010aca0c783ef3e81d84d6064",
+    "frame_count": "371",
+    "body_manifest_sha256": "8250dffb5aec7f13420864f35bf9494ee255d2577bdcfb03e6488dd6016fe354",
+    "timeline": "timelines/g004_recording_026.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_027",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_027\\recording_027.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "cf7910ef1d23637d8bc451130da29500a99f84bcbcd08f4790a46a0bc39429c8",
+    "frame_count": "393",
+    "body_manifest_sha256": "c7f493d1f48a360d3e4c537d39639a072b66b7cf2fce24873d8ad86cbfc67dbf",
+    "timeline": "timelines/g004_recording_027.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_028",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_028\\recording_028.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "1fe237823e034af063013ba2159f6810f91e0402346426190c3ff61b683d0dce",
+    "frame_count": "388",
+    "body_manifest_sha256": "5531c00498748e9bba93c2007245256b83df8cdf0e573e2b0a3a8d2a940810b1",
+    "timeline": "timelines/g004_recording_028.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_029",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_029\\recording_029.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "e583bcdf26c0be3e9c223611a36c783e1ce969620cc3b0ea23090a7c4a0fbc18",
+    "frame_count": "365",
+    "body_manifest_sha256": "749c416cf877a47a981c9b5d842dc4ee291c30b2297d9c1026086a7f78bf70a7",
+    "timeline": "timelines/g004_recording_029.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_030",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_030\\recording_030.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "2aea1a74c6f55acf5baa3d9f391c8032ef3f3f9836dbd87fa32fe078ac005d95",
+    "frame_count": "366",
+    "body_manifest_sha256": "219d4d2a132663c49906c595e1647e0e0519ca6862d9d9f35d13745a9ee4759b",
+    "timeline": "timelines/g004_recording_030.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_031",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_031\\recording_031.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "af644f3acb46dceea9cf83f5255b94da7f48f68532fc74183f1f900208f9fc98",
+    "frame_count": "414",
+    "body_manifest_sha256": "b8b2736e579dd894e0469cfb0bf527e1cbf6210858483ae113a02a02f843f755",
+    "timeline": "timelines/g004_recording_031.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_032",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_032\\recording_032.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "58babda2437e395cdb36656fd713b1a31f8bb3dcb50b661b139edd4029fc1dbf",
+    "frame_count": "400",
+    "body_manifest_sha256": "e12b61957f3267c604c3c7279851fe34b27b3f89ddbe2fa40e4564f25104adbb",
+    "timeline": "timelines/g004_recording_032.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_033",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_033\\recording_033.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "ea7218d824ee3a79ea42ce1d087919d9448d98d270518926108bee132baccc7e",
+    "frame_count": "548",
+    "body_manifest_sha256": "38dfeadf5f8d569fca1db6b8f12fafbd64210a50ac5a97538646f8319a9ef46f",
+    "timeline": "timelines/g004_recording_033.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_034",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_034\\recording_034.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "2878ac0d8c753767fe5062147f12325be114c7dbac20f6694ff3243205c16076",
+    "frame_count": "487",
+    "body_manifest_sha256": "ba4f2fd08dab7261260275176aee0179b0c5c6347b316ebc5f2868c6ed289f6d",
+    "timeline": "timelines/g004_recording_034.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_035",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_035\\recording_035.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "b7dec3221f58181ac26ab38b5d2fc586c2868cad23340217a29baa0ecc97809f",
+    "frame_count": "443",
+    "body_manifest_sha256": "b02768ebee800e34761c9404f59fdf7205f114c4e82016b0975c550e672931ca",
+    "timeline": "timelines/g004_recording_035.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_036",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_036\\recording_036.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "35aaf73ada1146acf44c8457ddbb64a77d8745ab3b478d9cc156d3d24ef84529",
+    "frame_count": "437",
+    "body_manifest_sha256": "2dee7154996449b7b9bd303d4f2122d1c116e6e4fc745b6ee210b66609a3d7f2",
+    "timeline": "timelines/g004_recording_036.json"
+  },
+  {
+    "group": "4",
+    "recording": "recording_037",
+    "svo_path": "F:\\experiment_data\\20261105_group004\\recording_037\\recording_037.svo2",
+    "setup_id": "group004_hallway_lower_20261105",
+    "source_svo_sha256": "6ff78b613813c4a115b919e7cd40ace30a5929038d2c124ce8b99a248d25a767",
+    "frame_count": "353",
+    "body_manifest_sha256": "def3cd86cd27f5cb9d931cf73235c0a34f6dd89268e45a4fdf8f0f79a326dbd2",
+    "timeline": "timelines/g004_recording_037.json"
+  }
+]

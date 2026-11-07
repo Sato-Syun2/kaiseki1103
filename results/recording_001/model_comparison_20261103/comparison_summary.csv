@@ -1,6 +1,0 @@
-rank,profile,detection_model,model_gen,raw_body_observations,trusted_skeleton_observations,frames_with_trusted_skeleton,trusted_track_ids,mean_confident_3d_joints,median_confident_3d_joints,mean_confident_joint_score,replay_page
-1,ACCURATE_GEN2,HUMAN_BODY_ACCURATE,GEN_2,293,242,140,"[0, 3]",33.64462809917355,34,98.01120758244049,ACCURATE_GEN2/index.html
-2,MEDIUM_GEN2,HUMAN_BODY_MEDIUM,GEN_2,340,223,141,"[1, 2]",33.874439461883405,34,98.22340794432753,MEDIUM_GEN2/index.html
-3,ACCURATE_GEN1,HUMAN_BODY_ACCURATE,GEN_1,202,150,92,"[0, 2]",31.8,34,66.7221966433575,ACCURATE_GEN1/index.html
-4,MEDIUM_GEN1,HUMAN_BODY_MEDIUM,GEN_1,132,104,67,"[2, 3]",31.567307692307693,34,61.12289748771359,MEDIUM_GEN1/index.html
-5,FAST_GEN1,HUMAN_BODY_FAST,GEN_1,86,59,41,"[1, 2]",31.16949152542373,32,57.065828952924136,FAST_GEN1/index.html

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>歩行者追跡の比較</title>
+<style>
+body{font:15px system-ui,sans-serif;background:#edf3f7;color:#19364b;margin:0}main{max-width:1400px;margin:auto;padding:24px}section{background:white;padding:18px;border-radius:10px;margin:16px 0}button,select{padding:8px;font:inherit}label{margin:8px;display:inline-block}#slider{width:100%}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}canvas{width:100%;background:#f5f8fa}p{line-height:1.7}.notice{border-left:4px solid #bd8a2b;padding-left:12px}#details{white-space:pre-wrap;max-height:240px;overflow:auto;font:13px monospace}@media(max-width:850px){.grid{grid-template-columns:1fr}}
+</style>
+<main><h1 id="title"></h1>
+<p class="notice">座標校正は別途検証が必要です。SDK骨格は推定値です。人物の解析IDと元SDK IDを分けて表示し、補間・予測は位置取得率に含めません。</p>
+<section><button id="play">再生</button> <button id="prev">前</button> <button id="next">次</button>
+<label>表示 <select id="mode"><option value="candidate">改善候補</option><option value="baseline">旧処理</option></select></label>
+<label>速度 <select id="rate"><option>.25</option><option>.5</option><option selected>1</option><option>2</option></select></label>
+<label><input type="checkbox" id="derived">補間・予測も表示</label><label><input type="checkbox" id="bones" checked>骨格</label>
+<input type="range" id="slider" min="0" step="0.001"><div id="clock"></div></section>
+<div class="grid"><section><h2>元画像と人物対応</h2><canvas id="video"></canvas><p id="imageClock"></p></section>
+<section><h2>廊下座標の軌跡</h2><canvas id="plan" width="850" height="650"></canvas>
+<p>実線: SDK由来推定、点線: 部分観測からの推定、破線: 補間・予測。観測のない区間は分断し、現在位置の印を残し続けません。</p></section></div>
+<section><h2>現在の推定と対応根拠</h2><div id="details"></div><p><a href="trajectories.csv">軌跡CSV</a> / <a href="metrics.json">比較指標</a> / <a href="tracking.json">対応・推定の根拠</a></p></section></main>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+'use strict';
+const D=JSON.parse(document.getElementById('data').textContent),$=id=>document.getElementById(id);
+const palette=['#0b8a67','#285db5','#cc6b16','#a4488f','#12899a','#9c4c39'];
+const reviewLabels={reviewed_cross_person_excluded:'目視確認で除外',other_observation_on_reviewed_image_not_adjudicated:'確認画像上の未判定観測',unreviewed_between_images_with_crossing:'混在を確認した画像の間・未確認',unreviewed_outside_review_window:'目視確認対象外'};
+const color=id=>palette[[...String(id)].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,0)%palette.length];
+const images=D.frames.filter(f=>f.image), raw=new Map(), candidate=new Map(D.candidate.map(p=>[p.obs_id,p]));
+const frameOrder=new Map(D.frames.map((f,i)=>[f.frame_index,i]));
+const anchored=new Map((D.anchored||[]).map(p=>[p.obs_id,p]));
+if(D.anchored){const option=document.createElement('option');option.value='anchored';option.textContent='手動アンカー適用';$('mode').appendChild(option)}
+for(const o of D.raw){if(!raw.has(o.frame_index))raw.set(o.frame_index,[]);raw.get(o.frame_index).push(o)}
+const bones=[[0,1],[1,2],[2,3],[3,26],[2,5],[5,6],[6,7],[2,12],[12,13],[13,14],[0,18],[18,19],[19,20],[0,22],[22,23],[23,24]];
+let time=0,playing=false,last=0,imageIndex=-1;
+const img=new Image(),video=$('video'),v=video.getContext('2d');video.width=D.width;video.height=D.height;
+$('title').textContent=D.recording+' / 原結果と改善候補';$('slider').max=D.duration_s;
+function nearest(array,t){let lo=0,hi=array.length-1;while(lo<hi){const m=(lo+hi)>>1;if(array[m].t<t)lo=m+1;else hi=m}if(lo>0&&Math.abs(array[lo-1].t-t)<Math.abs(array[lo].t-t))lo--;return lo}
+function valid(p){return p&&p.length>=2&&p.every(Number.isFinite)}
+function selected(){const mode=$('mode').value;let p=D[mode];if(mode!=='baseline'&&$('derived').checked)p=p.concat((mode==='anchored'?D.anchored_derived:D.derived).filter(p=>p.position_source!=='smoothed'));return p.filter(p=>p.xyz&&p.track_id!==null)}
+function drawImage(){v.clearRect(0,0,video.width,video.height);if(img.complete&&img.naturalWidth)v.drawImage(img,0,0,video.width,video.height);if(imageIndex<0)return;
+for(const o of raw.get(images[imageIndex].frame_index)||[]){const p=($('mode').value==='anchored'?anchored:candidate).get(o.obs_id);const identity=$('mode').value==='baseline'?'sdk:'+o.sdk_id:p?.track_id;v.strokeStyle=identity==null?'#aaa':color(identity);v.fillStyle=v.strokeStyle;
+if($('bones').checked){v.lineWidth=2;for(const [a,b]of bones){if(valid(o.pixels[a])&&valid(o.pixels[b])&&o.joint_confidence[a]>=20&&o.joint_confidence[b]>=20){v.beginPath();v.moveTo(...o.pixels[a]);v.lineTo(...o.pixels[b]);v.stroke()}}}
+const anchor=[0,2,26].map(k=>o.pixels[k]).find(p=>valid(p)&&p[0]>=0&&p[0]<D.width&&p[1]>=0&&p[1]<D.height);if(anchor){v.font='17px sans-serif';v.fillText(`解析 ${identity??'未確定'} / SDK ${o.sdk_id}`,anchor[0]+5,anchor[1]-8)}}}
+img.onload=drawImage;
+function drawPlan(){const ctx=$('plan').getContext('2d'),W=850,H=650,pts=selected(),by=new Map();ctx.clearRect(0,0,W,H);
+const xmax=Math.max(16,...pts.map(p=>p.xyz[0])),xmin=Math.min(-.5,...pts.map(p=>p.xyz[0]));const ymin=Math.min(-.4,...pts.map(p=>p.xyz[1])),ymax=Math.max(2.8,...pts.map(p=>p.xyz[1]));
+const X=x=>60+(x-xmin)/(xmax-xmin)*(W-110),Y=y=>H-50-(y-ymin)/(ymax-ymin)*(H-90);
+ctx.strokeStyle='#ccd8df';ctx.fillStyle='#456';ctx.font='12px sans-serif';for(let x=Math.ceil(xmin);x<=xmax;x+=2){ctx.beginPath();ctx.moveTo(X(x),30);ctx.lineTo(X(x),H-45);ctx.stroke();ctx.fillText(x+'m',X(x)-9,H-20)}for(let y=Math.ceil(ymin*2)/2;y<=ymax;y+=.5){ctx.beginPath();ctx.moveTo(45,Y(y));ctx.lineTo(W-30,Y(y));ctx.stroke();ctx.fillText(y.toFixed(1),8,Y(y))}
+for(const p of pts){if(p.t>time)continue;if(!by.has(p.track_id))by.set(p.track_id,[]);by.get(p.track_id).push(p)}
+for(const [id,arr]of by){arr.sort((a,b)=>a.t-b.t);ctx.strokeStyle=color(id);ctx.fillStyle=color(id);ctx.lineWidth=2;let prev=null;
+for(const p of arr){const sources=[p.position_source,prev?.position_source];const dashed=sources.some(s=>['interpolated','predicted'].includes(s));ctx.setLineDash(dashed?[8,5]:sources.includes('partial_observation_estimate')?[2,4]:[]);const adjacent=prev&&frameOrder.get(p.frame_index)-frameOrder.get(prev.frame_index)===1;if(prev&&p.t-prev.t<=.4&&p.t>prev.t&&adjacent){ctx.beginPath();ctx.moveTo(X(prev.xyz[0]),Y(prev.xyz[1]));ctx.lineTo(X(p.xyz[0]),Y(p.xyz[1]));ctx.stroke()}prev=p}
+ctx.setLineDash([]);if(prev&&time-prev.t<=.2){ctx.beginPath();ctx.arc(X(prev.xyz[0]),Y(prev.xyz[1]),5,0,Math.PI*2);ctx.fill();ctx.fillText('解析 '+id,X(prev.xyz[0])+8,Y(prev.xyz[1])-6)}}
+ctx.fillStyle='#123';ctx.fillText('廊下長手方向 X →',W/2-50,H-2);ctx.fillText('横方向 Y',6,15)}
+function render(){time=Math.max(0,Math.min(D.duration_s,time));$('slider').value=time;$('clock').textContent=`人物データ ${D.frames[nearest(D.frames,time)].t.toFixed(3)} 秒 / 再生 ${time.toFixed(3)} 秒 / 全長 ${D.duration_s.toFixed(3)} 秒`;
+const i=nearest(images,time);if(i!==imageIndex){imageIndex=i;img.src=images[i].image}else drawImage();$('imageClock').textContent=`画像時刻 ${images[i].t.toFixed(3)} 秒（再生時刻との差 ${(images[i].t-time).toFixed(3)} 秒）。画像上の骨格は画像時刻のものです。`;
+const fi=D.frames[nearest(D.frames,time)].frame_index;const current=D[$('mode').value].filter(p=>p.frame_index===fi);$('details').textContent=current.map(p=>JSON.stringify({SDK:p.sdk_id,解析ID:p.track_id,被験者:p.subject_id,状態:p.id_status,出所:p.position_source,画像確認:reviewLabels[p.visual_review_status]??'未記録',位置:p.xyz,根拠:p.association_reason})).join('\n')||'このフレームに人物観測はありません。';drawPlan()}
+$('play').onclick=()=>{playing=!playing;last=performance.now();$('play').textContent=playing?'停止':'再生'};
+$('slider').oninput=e=>{time=Number(e.target.value);render()};$('prev').onclick=()=>{time=D.frames[Math.max(0,nearest(D.frames,time)-1)].t;render()};$('next').onclick=()=>{time=D.frames[Math.min(D.frames.length-1,nearest(D.frames,time)+1)].t;render()};for(const id of ['mode','derived','bones'])$(id).onchange=render;
+function tick(now){if(playing){time+=(now-last)/1000*Number($('rate').value);if(time>=D.duration_s){time=D.duration_s;playing=false;$('play').textContent='再生'}render()}last=now;requestAnimationFrame(tick)}render();requestAnimationFrame(tick);
+</script></html>

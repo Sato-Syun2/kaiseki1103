@@ -1,0 +1,14 @@
+{
+  "status": "prepared_not_windows_validated",
+  "files_sha256": {
+    "depth_person_prototype.py": "71a21e758947115659737e5e1c9627ad2e315e021aebc3612b457534ba976c97",
+    "corridor_tracking/depth_corridor_replay.py": "01030328f3c377140a0a0402a0e042550027e907953e08c8abd0c5d9daed6e10",
+    "corridor_tracking/depth_person_comparison.py": "b5f3ec5a6309c8fcb5bfa014f24c18db7eb057f84f13b203b69015be1039da23",
+    "corridor_tracking/assignment.py": "6a1ae57e324d231b9c567dd3181ec3f55ca90a229de922454421939f97705b86",
+    "corridor_tracking/portable_depth_replay.py": "df0d4c1acaa060934ff67f25081f0c68432b0139411cf5e7ae1ce7e59d8ef8c4",
+    "corridor_tracking/data.py": "c7d5877f6a1b076c514624a3b6c6b646ddab42f352639991d962336b784f9021",
+    "corridor_tracking/bootstrap_identity_viewer.ps1": "02c209acd16d42879f3afe781e6586cf45281f6b2039a8c5b1dcf2dde75bee47",
+    "corridor_tracking/verify_portable_bundle.py": "6af102c4d94232b7b7c9e379f2e1771120fb84f835f876ebbcf434f6c601920f"
+  },
+  "scope": "candidate identity replay only; no images, depth, SDK or model included"
+}

@@ -1,0 +1,82 @@
+{
+  "method": "recurrent-depth-voxel plane fitting; camera frame transformed to floor/corridor basis",
+  "provisional": true,
+  "setup_id": "test_hallway_20261104_test002_candidate",
+  "applies_to": {
+    "serial_number": 35290843,
+    "width": 1920,
+    "height": 1080,
+    "depth_mode": "NEURAL",
+    "coordinate_system": "IMAGE (x right, y down, z forward)",
+    "coordinate_units": "meter",
+    "intrinsics_left": {
+      "fx": 1054.5377197265625,
+      "fy": 1054.5377197265625,
+      "cx": 974.342529296875,
+      "cy": 521.708984375
+    }
+  },
+  "source_depth_dir": "/data/experiment_data/kaiseki1103/exchange/test_20261104_candidate_02/test_002/depth_export",
+  "source_depth_mode": "NEURAL",
+  "source_sdk_version": "5.5.1",
+  "sampled_depth_frames": 63,
+  "depth_points": 1490314,
+  "recurrent_voxels_used": 22489,
+  "floor_plane_camera_image": {
+    "normal_down": [
+      -0.11533561916470528,
+      0.9027066681745742,
+      0.41450979021616985
+    ],
+    "offset_m": -2.4137317586666516,
+    "inlier_recurrent_voxels": 9334,
+    "median_abs_residual_m": 0.02336210805816563
+  },
+  "visible_wall_plane_camera_image": {
+    "normal": [
+      0.9441724985625595,
+      0.16544826098770993,
+      -0.2848950085457389
+    ],
+    "offset_m": 2.2884756421255226,
+    "inlier_recurrent_voxels": 7209,
+    "median_abs_residual_m": 0.03176226981838415
+  },
+  "corridor_basis_camera_image": {
+    "X_into_hallway": [
+      0.3267427640056426,
+      -0.3595955787051538,
+      0.8740309982750375
+    ],
+    "Y_positive_toward_ZED_visible_far_wall": [
+      -0.9380494982258917,
+      -0.2362449809178273,
+      0.25347869312683546
+    ],
+    "Z_up": [
+      0.11533561916470528,
+      -0.9027066681745742,
+      -0.41450979021616985
+    ]
+  },
+  "camera_position_in_floor_origin_basis_m": [
+    0.0,
+    0.0,
+    2.4137317586666516
+  ],
+  "camera_height_above_floor_m": 2.4137317586666516,
+  "visible_wall_Y_m": 2.1074411104609063,
+  "camera_to_visible_wall_m": 2.1074411104609063,
+  "other_wall_inference": {
+    "method": "ZED-visible far-wall position minus LiDAR-only corridor wall gap",
+    "lidar_wall_gap_m": 2.379920541271455,
+    "opposite_wall_Y_m_assuming_same_boundaries": -0.2724794308105487,
+    "camera_distance_to_opposite_wall_m_assuming_same_boundaries": 0.2724794308105487,
+    "provisional": true
+  },
+  "notes": [
+    "The camera is at X=0; the origin is its optical-center projection onto the floor, and Z=0 is the floor.",
+    "Y is positive toward the wall fitted in ZED depth; the camera-side near wall is inferred on the negative-Y side.",
+    "Any opposite-wall position inferred from the LiDAR wall gap assumes both sensors observe the same corridor boundaries."
+  ]
+}

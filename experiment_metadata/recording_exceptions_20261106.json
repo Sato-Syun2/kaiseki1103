@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-11-06",
+  "source": "operator report; read-only recording progress inspection",
+  "plan_sha256": "ebf77fa7972d13c7d51f0bf31021d57c8bb63e77fd347ac4ad34678b63dd8a5a",
+  "plan_snapshot_sha256": "07288995ba4f7da863fbd54f39bb831489a1c25567b3c6e1866d82dc9de10efd",
+  "physical_svo_files_independently_verified": false,
+  "groups": {
+    "G06": {
+      "status": "first_three_trials_operator_mapped_later_file_mapping_unresolved",
+      "operator_report": "Updated 2026-11-07: basic trial 1 was recorded in calibration take 1, trial 2 in recording_001, trial 3 in recording_002; trial 4 onward were recorded correctly. The meaning of correctly for file names is being reconciled with the recorder progress. Follow-up: the mistaken selection was on the recording program; correspondence with actual filenames from trial 4 onward has not been checked.",
+      "observed_progress": {
+        "sha256": "e4cda0e7e1b3e03f7aecbf5873e1196a08a42b63fbc8aff541d4a709f382df76",
+        "calibration_take_1_recording_id": "calibration_001",
+        "trial_1_recording_id": "recording_001",
+        "trial_2_recording_id": "recording_002",
+        "trial_3_attempt_present": false,
+        "trial_4_recording_id": "recording_003",
+        "interpretation": "These are recorder progress labels, not verified actual trial conditions or proof of the correction point.",
+        "calibration_take_2_recording_id": "calibration_002"
+      },
+      "analysis_policy": "Do not use calibration take 1 as calibration; derive and validate group 6 calibration from take 2. Trial 1–3 source labels are operator-reported and require SVO verification. Do not map trial 4 onward automatically until the reported correction is reconciled with progress and source files.",
+      "operator_confirmed_basic_trial_1": {
+        "recording_label": "calibration take 1",
+        "progress_recording_id": "calibration_001",
+        "file_existence": "unverified"
+      },
+      "operator_confirmed_calibration": {
+        "recording_label": "calibration take 2",
+        "progress_recording_id": "calibration_002",
+        "file_existence": "unverified",
+        "calibration_parameters": "not yet derived or independently validated"
+      },
+      "operator_confirmed_basic_trial_2": {
+        "progress_recording_id": "recording_001",
+        "file_existence": "unverified"
+      },
+      "operator_confirmed_basic_trial_3": {
+        "progress_recording_id": "recording_002",
+        "file_existence": "unverified"
+      },
+      "reported_group_root_windows": "F:\\experiment_data\\20261105_group006",
+      "file_mapping_from_trial_4": "unverified; do not automatically assign"
+    },
+    "G07": {
+      "status": "additional_trials_need_file_and_condition_review",
+      "operator_report": "No SVO was generated for additional trials 2 and 3. Additional trials 4 and 5 were recorded as test1 and test2 respectively in the 1106test folder.",
+      "reported_additional_trials": [
+        {
+          "additional_trial_number": 4,
+          "planned_global_trial_number": 58,
+          "reported_recording_label": "test1",
+          "file_existence": "unverified",
+          "reported_parent_folder": "1106test",
+          "full_path": "unknown"
+        },
+        {
+          "additional_trial_number": 5,
+          "planned_global_trial_number": 59,
+          "reported_recording_label": "test2",
+          "file_existence": "unverified",
+          "reported_parent_folder": "1106test",
+          "full_path": "unknown"
+        }
+      ],
+      "observed_progress": {
+        "sha256": "9769feceea44031f17c1e19acad389abc5d753d0a0d77d1210f6c1bc86d378e7",
+        "additional_trial_2_global_number": 56,
+        "recording_id": "recording_056",
+        "status": "needs_rerecord",
+        "reported_reason": "SVO2 file did not exist when recorder stopped",
+        "interpretation": "Recorder reported failure for trial 56; user also reports trial 57 failed. The actual files and any replacement recordings have not been independently checked."
+      },
+      "analysis_policy": "Treat additional trials 2 and 3 as lacking their original SVO unless a later replacement is verified. Verify 1106test/test1 and test2 files and their timestamps before analysis; do not infer other trial mappings.",
+      "reported_missing_svo": [
+        {
+          "additional_trial_number": 2,
+          "planned_global_trial_number": 56,
+          "source": "operator report; recorder also reported SVO2 missing",
+          "replacement_recording": "unknown"
+        },
+        {
+          "additional_trial_number": 3,
+          "planned_global_trial_number": 57,
+          "source": "operator report",
+          "replacement_recording": "unknown"
+        }
+      ],
+      "reported_group_root_windows": "F:\\experiment_data\\20261106_group007",
+      "reported_related_test_directory_windows": "F:\\experiment_data\\20261106_test\\test_001",
+      "reported_related_test_directory_interpretation": "The operator supplied this path as related to the group 7 tests; exact trial association, the other path, and file existence remain unverified."
+    },
+    "G09": {
+      "status": "operator_reported_condition_deviation",
+      "global_trial_number": 9,
+      "progress_recording_id": "recording_009",
+      "progress_sha256": "c425557d02dbca65449fcc26c27b2c4e06a802e10f5b2b5648856987b3d6a83b",
+      "planned_condition_id": "E07",
+      "planned_corridor_width": "広い",
+      "operator_reported_actual_corridor_width": "狭い",
+      "actual_condition_id": null,
+      "analysis_policy": "Keep planned and actual width separate; do not label the actual condition E07 or infer another condition ID without verifying all factors."
+    }
+  },
+  "camera_setup_operator_report": {
+    "G04_G05_G06": "likely same; verify individual calibrations",
+    "G07": "separate",
+    "G08_G09": "same according to operator; verify individual calibrations",
+    "status": "not independently validated"
+  },
+  "reported_group_roots_windows": {
+    "G06": "F:\\experiment_data\\20261105_group006",
+    "G07": "F:\\experiment_data\\20261106_group007",
+    "G08": "F:\\experiment_data\\20261106_group008",
+    "G09": "F:\\experiment_data\\20261106_group009"
+  }
+}

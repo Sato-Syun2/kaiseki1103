@@ -74,7 +74,9 @@ def fit_plane_ransac(
     return normal, offset, inliers
 
 
-def svg_cross_section(path: Path, visible_wall_y_m: float, near_wall_y_m: float | None) -> None:
+def svg_cross_section(
+    path: Path, visible_wall_y_m: float, near_wall_y_m: float | None, label: str
+) -> None:
     """Draw the estimated camera and side-wall locations in the lateral axis."""
     width, height = 960, 460
     x0, x1 = -1.0, 3.0
@@ -87,7 +89,7 @@ def svg_cross_section(path: Path, visible_wall_y_m: float, near_wall_y_m: float 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
-        '<text x="50" y="45" font-family="sans-serif" font-size="22" font-weight="bold">Recording 001: camera-relative corridor cross-section</text>',
+        f'<text x="50" y="45" font-family="sans-serif" font-size="22" font-weight="bold">{label}: camera-relative corridor cross-section</text>',
         '<text x="50" y="76" font-family="sans-serif" font-size="14" fill="#555">ZED wall fit; opposite wall is inferred from the LiDAR wall gap</text>',
         f'<line x1="{sx(x0):.1f}" y1="{y}" x2="{sx(x1):.1f}" y2="{y}" stroke="#555" stroke-width="2"/>',
     ]
@@ -112,6 +114,7 @@ def main() -> int:
     parser.add_argument("depth_dir", type=Path, help="folder containing zed_depth_points.npz and camera.json")
     parser.add_argument("--lidar-candidate", type=Path, help="optional lidar_corridor_candidate.json for width inference")
     parser.add_argument("--output-dir", type=Path, help="defaults to depth_dir")
+    parser.add_argument("--label", default="Recording 001", help="label shown on the cross-section plot")
     args = parser.parse_args()
 
     depth_dir = args.depth_dir
@@ -161,8 +164,14 @@ def main() -> int:
 
     metadata = json.loads((depth_dir / "camera.json").read_text(encoding="utf-8"))
     result = {
+        "label": args.label,
         "method": "recurrent-depth-voxel plane fitting; camera frame transformed to floor/corridor basis",
         "provisional": True,
+        "setup_id": metadata.get("setup_id"),
+        "applies_to": {
+            key: metadata.get(key)
+            for key in ["serial_number", "width", "height", "depth_mode", "coordinate_system", "coordinate_units", "intrinsics_left"]
+        },
         "source_depth_dir": str(depth_dir.resolve()),
         "source_depth_mode": metadata.get("depth_mode"),
         "source_sdk_version": metadata.get("sdk_version"),
@@ -209,7 +218,7 @@ def main() -> int:
     json_path = output_dir / "zed_corridor_candidate.json"
     json_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     svg_path = output_dir / "zed_corridor_cross_section.svg"
-    svg_cross_section(svg_path, wall_y, other_wall_y)
+    svg_cross_section(svg_path, wall_y, other_wall_y, args.label)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     print(f"cross_section: {svg_path}")
     return 0

@@ -1,0 +1,56 @@
+{
+  "method": "IMU gravity projection plus RANSAC of repeated vertical LiDAR surfaces",
+  "source_frame": "livox_frame",
+  "provisional": true,
+  "imu_mean_acceleration": [
+    -0.6745344153382724,
+    -0.07302582155044814,
+    0.7291414407500647
+  ],
+  "imu_mean_magnitude_g": 0.9959802652201212,
+  "up_axis_in_lidar_frame": [
+    -0.67725680808464,
+    -0.07332055071825015,
+    0.7320842251717884
+  ],
+  "floor_offset_projection_m": -2.4850000000000323,
+  "lidar_height_above_floor_m": 2.4850000000000323,
+  "corridor_x_axis_in_lidar_frame": [
+    0.7126902784187373,
+    -0.31252082195878833,
+    0.6280153683546494
+  ],
+  "corridor_y_axis_in_lidar_frame": [
+    0.18274513112646237,
+    0.9470769940636167,
+    0.26391169804500186
+  ],
+  "wall_planes": [
+    {
+      "point_count": 11625,
+      "lateral_offset_from_lidar_m": -0.14508490835081836,
+      "longitudinal_span_relative_to_lidar_m": [
+        0.5965771406034643,
+        14.266757517931566
+      ]
+    },
+    {
+      "point_count": 79599,
+      "lateral_offset_from_lidar_m": 2.2348356329206367,
+      "longitudinal_span_relative_to_lidar_m": [
+        -0.47175698639405816,
+        24.73204242237013
+      ]
+    }
+  ],
+  "wall_gap_m": 2.379920541271455,
+  "origin": "LiDAR origin for this provisional candidate; camera origin pending ZED depth.",
+  "notes": [
+    "The wall fits are candidates from one recording and require cross-check against ZED depth.",
+    "Camera-to-LiDAR longitudinal offset is not estimated by this LiDAR-only pass."
+  ],
+  "source_bag": "/data/experiment_data/recordings/20261104_test/test_002/lidar",
+  "point_cloud_frames": 332,
+  "imu_messages": 6650,
+  "valid_point_returns": 2962009
+}

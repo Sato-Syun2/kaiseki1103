@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "source_tracking_manifest_sha256": "db7b0189f86c1a2f52e09066efe0bfa0b43075082aa2a0b2d983582ff7c26658",
+  "source_person_manifest_sha256": "c65d1322ae41410cea81c7071d2d56fc54add4946fd28506032cdd06b60e5904",
+  "calibration_sha256": "43194f036524265841fa6cc57a887f1d741592785a65c76095ec23e52cc9260e",
+  "source_svo_sha256": "73f2c8a64e4fe873a0b93019f1f63b89aeca6574a355eedde4eac0545585626c",
+  "frame_count": 297,
+  "script_sha256": "aa761cb5f4236fca54effdacf855c7b2af85c25a45b64f8e3047da677f1cd18c",
+  "index_sha256": "40cbca5c81405b388fda3f03cb80d3c7237f8b0c0985a553e8e0061aea2eebb8",
+  "limits": [
+    "visible surface, not body centre or foot position",
+    "provisional calibration and ID",
+    "linked source images are not copied"
+  ]
+}

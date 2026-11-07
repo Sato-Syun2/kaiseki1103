@@ -1,0 +1,35 @@
+{
+    "ROS2.distro": "jazzy",
+    "python.autoComplete.extraPaths": [
+        "/home/hp-ubuntu/ros2_ws/install/livox_ros_driver2/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/voicevox_sota/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/sota_openai/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/sota_bridge/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/rear_yield_controller/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/pose_fusion/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/lidar_people_detector_msgs/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/kachaka_interfaces/lib/python3.12/site-packages",
+        "/opt/ros/jazzy/opt/gz_sim_vendor/lib/python",
+        "/opt/ros/jazzy/opt/sdformat_vendor/lib/python",
+        "/opt/ros/jazzy/opt/gz_transport_vendor/lib/python",
+        "/opt/ros/jazzy/opt/gz_msgs_vendor/lib/python",
+        "/opt/ros/jazzy/opt/gz_math_vendor/lib/python",
+        "/opt/ros/jazzy/lib/python3.12/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/hp-ubuntu/ros2_ws/install/livox_ros_driver2/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/voicevox_sota/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/sota_openai/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/sota_bridge/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/rear_yield_controller/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/pose_fusion/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/lidar_people_detector_msgs/lib/python3.12/site-packages",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/kachaka_interfaces/lib/python3.12/site-packages",
+        "/opt/ros/jazzy/opt/gz_sim_vendor/lib/python",
+        "/opt/ros/jazzy/opt/sdformat_vendor/lib/python",
+        "/opt/ros/jazzy/opt/gz_transport_vendor/lib/python",
+        "/opt/ros/jazzy/opt/gz_msgs_vendor/lib/python",
+        "/opt/ros/jazzy/opt/gz_math_vendor/lib/python",
+        "/opt/ros/jazzy/lib/python3.12/site-packages"
+    ]
+}

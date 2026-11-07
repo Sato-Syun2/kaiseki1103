@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50" y="45" font-family="sans-serif" font-size="22" font-weight="bold">Group 002 calibration_001: camera-relative corridor cross-section</text>
+<text x="50" y="76" font-family="sans-serif" font-size="14" fill="#555">ZED wall fit; opposite wall is inferred from the LiDAR wall gap</text>
+<line x1="100.0" y1="260" x2="905.0" y2="260" stroke="#555" stroke-width="2"/>
+<line x1="100.0" y1="253" x2="100.0" y2="267" stroke="#555"/>
+<text x="100.0" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">-1.0</text>
+<line x1="200.6" y1="253" x2="200.6" y2="267" stroke="#555"/>
+<text x="200.6" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">-0.5</text>
+<line x1="301.2" y1="253" x2="301.2" y2="267" stroke="#555"/>
+<text x="301.2" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">0.0</text>
+<line x1="401.9" y1="253" x2="401.9" y2="267" stroke="#555"/>
+<text x="401.9" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">0.5</text>
+<line x1="502.5" y1="253" x2="502.5" y2="267" stroke="#555"/>
+<text x="502.5" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">1.0</text>
+<line x1="603.1" y1="253" x2="603.1" y2="267" stroke="#555"/>
+<text x="603.1" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">1.5</text>
+<line x1="703.8" y1="253" x2="703.8" y2="267" stroke="#555"/>
+<text x="703.8" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">2.0</text>
+<line x1="804.4" y1="253" x2="804.4" y2="267" stroke="#555"/>
+<text x="804.4" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">2.5</text>
+<line x1="905.0" y1="253" x2="905.0" y2="267" stroke="#555"/>
+<text x="905.0" y="290" text-anchor="middle" font-family="sans-serif" font-size="13">3.0</text>
+<text x="301.2" y="155" text-anchor="middle" font-family="sans-serif" font-size="14">camera projection</text>
+<circle cx="301.2" cy="260" r="8" fill="#225ea8"/>
+<line x1="724.5" y1="185" x2="724.5" y2="270" stroke="#d73027" stroke-width="5"/>
+<text x="724.5" y="172" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#a51f1b">ZED-visible far wall 2.10 m</text>
+<line x1="245.7" y1="185" x2="245.7" y2="270" stroke="#8c6bb1" stroke-width="4" stroke-dasharray="8 6"/>
+<text x="245.7" y="325" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#68428d">camera-side wall ≈ -0.28 m</text>
+<text x="502.5" y="420" text-anchor="middle" font-family="sans-serif" font-size="15">Y (m), positive toward the ZED-visible far wall</text>
+</svg>

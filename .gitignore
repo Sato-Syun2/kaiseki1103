@@ -2,7 +2,10 @@
 __pycache__/
 *.py[cod]
 .venv/
+.venv-depth/
 venv/
+/models/*.pt
+/models/*.onnx
 
 # Raw sensor recordings and depth point exports
 *.svo
@@ -22,3 +25,19 @@ results/**/shared_images/
 results/**/*.log
 results/group001_model_comparison_overview_*.html
 results/recording_*/model_comparison_*/
+
+# Versioned tracking runs include person images, observations and annotations
+results/tracking_v2/
+
+# Archived experimental results may contain person-specific tracking data.
+/不要なもの/results/
+
+# Local pose output and manual review may contain person-specific data
+pose.json
+pose.csv
+gaps.csv
+pose_review.csv
+yaw_events.csv
+pose_replay.html
+
+.venv-pose/

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently estimate Group 001 corridor geometry from a ROS 2 MCAP bag."""
+"""Independently estimate corridor geometry from a ROS 2 MCAP bag."""
 
 from __future__ import annotations
 
@@ -185,7 +185,7 @@ def estimate_geometry(points: np.ndarray, accelerations: np.ndarray) -> dict:
     }
 
 
-def save_plot(geometry: dict, output: Path) -> None:
+def save_plot(geometry: dict, output: Path, label: str) -> None:
     data = geometry.pop("_plot_data")
     points = data["points"]
     if len(points) > 30_000:
@@ -208,7 +208,7 @@ def save_plot(geometry: dict, output: Path) -> None:
     elements = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="white"/>',
-        '<text x="100" y="42" font-family="sans-serif" font-size="23" font-weight="bold">Recording 001: LiDAR corridor candidates (preliminary)</text>',
+        f'<text x="100" y="42" font-family="sans-serif" font-size="23" font-weight="bold">{label}: LiDAR corridor candidates (preliminary)</text>',
     ]
     x_tick = np.floor(x_min / 5) * 5
     while x_tick <= x_max:
@@ -244,16 +244,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bag", type=Path, help="rosbag2 directory containing metadata.yaml and MCAP")
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--label", default="Recording 001", help="label shown on the candidate plot")
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     points, accelerations, cloud_count, imu_count = read_bag(args.bag)
     geometry = estimate_geometry(points, accelerations)
     geometry["source_bag"] = str(args.bag.resolve())
+    geometry["label"] = args.label
     geometry["point_cloud_frames"] = cloud_count
     geometry["imu_messages"] = imu_count
     geometry["valid_point_returns"] = int(len(points))
     plot_path = args.output_dir / "lidar_corridor_candidate.svg"
-    save_plot(geometry, plot_path)
+    save_plot(geometry, plot_path, args.label)
     json_path = args.output_dir / "lidar_corridor_candidate.json"
     json_path.write_text(json.dumps(geometry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in geometry.items() if k != "notes"}, ensure_ascii=False, indent=2))

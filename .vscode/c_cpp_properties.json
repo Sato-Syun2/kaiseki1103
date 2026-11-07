@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/hp-ubuntu/ros2_ws/install/livox_ros_driver2/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/sota_bridge/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/sfm_controller/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/lidar_people_detector/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/lidar_people_detector_msgs/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/kachaka_interfaces/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/gazebo_sim/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/joy_controller/include/**",
+        "/home/hp-ubuntu/sota_kachaka_ws/install/human_detector/include/**",
+        "/opt/ros/jazzy/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ros2",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}

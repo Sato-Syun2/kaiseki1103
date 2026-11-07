@@ -1,0 +1,18 @@
+{
+  "retain_s": 2.0,
+  "max_speed_m_s": 3.5,
+  "acceleration_noise": 2.0,
+  "match_cost": 3.0,
+  "ambiguity_margin": 0.12,
+  "appearance_weight": 0.0,
+  "pixel_prediction_weight": 2.0,
+  "appearance_veto": 1.0,
+  "interpolate_s": 0.2,
+  "predict_s": 0.2,
+  "partial_max_sigma_m": 0.7,
+  "offset_max_age_s": 3.0,
+  "partial_enabled": true,
+  "birth_min_x_m": 0.5,
+  "roi_polygon": null,
+  "smoothing_s": 0.0
+}

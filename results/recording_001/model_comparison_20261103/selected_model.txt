@@ -1,3 +1,0 @@
-ACCURATE_GEN2
-Replay: selected/index.html
-Trusted skeleton observations: 242

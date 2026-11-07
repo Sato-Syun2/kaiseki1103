@@ -1,0 +1,128 @@
+{
+  "label": "Group 002 calibration_001",
+  "method": "recurrent-depth-voxel plane fitting; camera frame transformed to floor/corridor basis",
+  "provisional": true,
+  "setup_id": "group002_hallway_20261104_candidate",
+  "applies_to": {
+    "serial_number": 35290843,
+    "width": 1920,
+    "height": 1080,
+    "depth_mode": "NEURAL",
+    "coordinate_system": "IMAGE",
+    "coordinate_units": "meter",
+    "intrinsics_left": {
+      "fx": 1054.6754150390625,
+      "fy": 1054.6754150390625,
+      "cx": 974.3382568359375,
+      "cy": 521.7074584960938
+    }
+  },
+  "source_depth_dir": "/data/experiment_data/kaiseki1103/exchange/group002_group003_calibration_20261104_candidate_01/group002_calibration_001/depth_export",
+  "source_depth_mode": "NEURAL",
+  "source_sdk_version": "5.5.1",
+  "sampled_depth_frames": 146,
+  "depth_points": 3192172,
+  "recurrent_voxels_used": 35416,
+  "floor_plane_camera_image": {
+    "normal_down": [
+      -0.11759158316110643,
+      0.9034754430462286,
+      0.4121945455511097
+    ],
+    "offset_m": -2.4014630435218076,
+    "inlier_recurrent_voxels": 14200,
+    "median_abs_residual_m": 0.02566390942451391
+  },
+  "visible_wall_plane_camera_image": {
+    "normal": [
+      0.9446345854582875,
+      0.1783443926525088,
+      -0.2754247221392032
+    ],
+    "offset_m": 2.2510683659331057,
+    "inlier_recurrent_voxels": 10826,
+    "median_abs_residual_m": 0.022186540518886577
+  },
+  "corridor_basis_camera_image": {
+    "X_into_hallway": [
+      0.32300351825856916,
+      -0.3577070469361352,
+      0.8761931269787591
+    ],
+    "Y_positive_toward_ZED_visible_far_wall": [
+      -0.9390638672434644,
+      -0.23617322537631305,
+      0.24976240880704695
+    ],
+    "Z_up": [
+      0.11759158316110643,
+      -0.9034754430462286,
+      -0.4121945455511097
+    ]
+  },
+  "camera_position_in_floor_origin_basis_m": [
+    0.0,
+    0.0,
+    2.4014630435218076
+  ],
+  "camera_height_above_floor_m": 2.4014630435218076,
+  "visible_wall_Y_m": 2.1028650427408095,
+  "camera_to_visible_wall_m": 2.1028650427408095,
+  "other_wall_inference": {
+    "method": "ZED-visible far-wall position minus LiDAR-only corridor wall gap",
+    "lidar_wall_gap_m": 2.3787508561717443,
+    "opposite_wall_Y_m_assuming_same_boundaries": -0.27588581343093477,
+    "camera_distance_to_opposite_wall_m_assuming_same_boundaries": 0.27588581343093477,
+    "provisional": true
+  },
+  "notes": [
+    "The camera is at X=0; the origin is its optical-center projection onto the floor, and Z=0 is the floor.",
+    "Y is positive toward the wall fitted in ZED depth; the camera-side near wall is inferred on the negative-Y side.",
+    "Any opposite-wall position inferred from the LiDAR wall gap assumes both sensors observe the same corridor boundaries."
+  ],
+  "scope_transfer": {
+    "source_calibration_sha256": "f45b97a436a667e701df895a5aa021b4017d45474ba647f94054614963cff47c",
+    "source_applies_to": {
+      "serial_number": 35290843,
+      "width": 1920,
+      "height": 1080,
+      "depth_mode": "NEURAL",
+      "coordinate_system": "IMAGE (x right, y down, z forward)",
+      "coordinate_units": "meter",
+      "intrinsics_left": {
+        "fx": 1054.632080078125,
+        "fy": 1054.632080078125,
+        "cx": 974.344970703125,
+        "cy": 521.7097778320312
+      }
+    },
+    "target_applies_to": {
+      "serial_number": 35290843,
+      "width": 1920,
+      "height": 1080,
+      "depth_mode": "NEURAL",
+      "coordinate_system": "IMAGE",
+      "coordinate_units": "meter",
+      "intrinsics_left": {
+        "fx": 1054.6754150390625,
+        "fy": 1054.6754150390625,
+        "cx": 974.3382568359375,
+        "cy": 521.7074584960938
+      }
+    },
+    "intrinsics_delta_px": {
+      "fx": 0.0433349609375,
+      "fy": 0.0433349609375,
+      "cx": -0.0067138671875,
+      "cy": -0.0023193359375
+    },
+    "compatibility_max_intrinsics_delta_px": 1.0,
+    "coordinate_system_equivalence": "IMAGE axes",
+    "assumptions": [
+      "same physical setup ID; 3D points reconstructed with each recording intrinsics",
+      "floor/wall model and extrinsic camera pose remained fixed",
+      "intrinsic tolerance is a screening rule, not a measured position error"
+    ],
+    "status": "provisional_not_survey_validated"
+  }
+}
