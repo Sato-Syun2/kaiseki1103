@@ -88,7 +88,16 @@
       ],
       "reported_group_root_windows": "F:\\experiment_data\\20261106_group007",
       "reported_related_test_directory_windows": "F:\\experiment_data\\20261106_test\\test_001",
-      "reported_related_test_directory_interpretation": "The operator supplied this path as related to the group 7 tests; exact trial association, the other path, and file existence remain unverified."
+      "reported_related_test_directory_interpretation": "The operator supplied this path as related to the group 7 tests; exact trial association, the other path, and file existence remain unverified.",
+      "windows_svo_inventory_20261107": {
+        "reported_group_recording_svo_count": 55,
+        "reported_calibration_svo_count": 1,
+        "additional_test_candidates": [
+          "F:\\experiment_data\\20261106_test\\test_001\\test_001.svo2",
+          "F:\\experiment_data\\20261106_test\\test_002\\test_002.svo2"
+        ],
+        "interpretation": "Recorded in Windows terminal inventory; file contents and trial mapping are not verified."
+      }
     },
     "G09": {
       "status": "operator_reported_condition_deviation",
@@ -106,12 +115,27 @@
     "G04_G05_G06": "likely same; verify individual calibrations",
     "G07": "separate",
     "G08_G09": "same according to operator; verify individual calibrations",
-    "status": "not independently validated"
+    "status": "not independently validated",
+    "G04_G05_calibration": "operator confirmed groups 4 and 5 use the same calibration recording"
   },
   "reported_group_roots_windows": {
     "G06": "F:\\experiment_data\\20261105_group006",
     "G07": "F:\\experiment_data\\20261106_group007",
     "G08": "F:\\experiment_data\\20261106_group008",
     "G09": "F:\\experiment_data\\20261106_group009"
+  },
+  "building_corridor_width_operator_confirmation": {
+    "groups": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "approximate_width_m": 2.38,
+    "applied_previous_calibration_width_m": 2.376029800280445,
+    "confirmed_date": "2026-11-07",
+    "interpretation": "Physical walls; separate from narrow/wide experimental conditions. Opposite wall remains inferred, not measured in these calibration candidates."
   }
 }

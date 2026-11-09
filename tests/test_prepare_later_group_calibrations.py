@@ -22,6 +22,7 @@ def test_group6_uses_take2_and_keeps_take1_as_trial(tmp_path):
     assert result['calibration_svos'] == [str((root / 'calibration_002' / 'b.svo2').resolve())]
     assert result['operator_reported_trial_1_svos'] == [str((root / 'calibration_001' / 'a.svo2').resolve())]
     assert len(result['recording_svos']) == 1
+    assert discover(root, [6])[0]['calibration_svos'] == result['calibration_svos']
 
 
 def test_ambiguous_folders_or_calibration_do_not_choose_one(tmp_path):
@@ -33,6 +34,13 @@ def test_ambiguous_folders_or_calibration_do_not_choose_one(tmp_path):
         with pytest.raises(ValueError):
             prepare(entry, tmp_path, Path('sdk'), Path('analysis'), tmp_path, 'run')
         run.assert_not_called()
+
+
+def test_group5_reports_shared_group4_calibration(tmp_path):
+    touch(tmp_path / 'date_group005' / 'recording_001' / 'a.svo2')
+    entry = discover(tmp_path, [5])[0]
+    assert entry['status'] == 'uses_group4_calibration_operator_report'
+    assert entry['calibration_svos'] == []
 
 
 def test_existing_calibration_is_never_overwritten(tmp_path):
@@ -61,6 +69,14 @@ def test_dated_test_folder_finds_underscored_labels_without_verifying_identity(t
     assert [(e['additional_trial'], e['status']) for e in result['test_directories']] == [
         (4, 'one_name_based_candidate_unverified'), (5, 'one_name_based_candidate_unverified')]
     assert 'test_001' in result['test_directories'][0]['svo_candidates'][0]
+
+
+def test_group7_search_does_not_label_earlier_test_recordings(tmp_path):
+    touch(tmp_path / '20261104_test' / 'test_001' / 'test_001.svo2')
+    touch(tmp_path / '20261106_test' / 'test_001' / 'test_001.svo2')
+    result = discover_group7_additional(tmp_path)
+    assert len(result['test_directories']) == 2
+    assert '20261106_test' in result['test_directories'][0]['svo_candidates'][0]
 
 
 def test_prepare_uses_group6_take2_and_local_output(tmp_path):

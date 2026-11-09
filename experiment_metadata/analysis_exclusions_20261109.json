@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "decision_date": "2026-11-09",
+  "basis": "実験者の申告。録画・解析原本は保存し、対象録画を以後の歩行・ID・条件解析から除外する。",
+  "exclusions": [
+    {
+      "group": 2,
+      "recording": "recording_017",
+      "source_svo_sha256": "787054f5998f81a5e42e9a414a6037e2d2ef996a0f438c233375ac2525453340",
+      "trial": 17,
+      "reason": "take 1は除外し、同一試行のtake 2を採用する。",
+      "replacement_recording": "recording_018",
+      "replacement_source_svo_sha256": "153fb9ff125f10fbe24e5600f9e7f8c8165b1c5b90d0c29b9b72a0d3d02c685d"
+    },
+    {
+      "group": 4,
+      "recording": "recording_022",
+      "source_svo_sha256": "1b698afde6910be418e0baae8d8c087e217a1f92a41bc9f97233303945e418e4",
+      "trial": 22,
+      "reason": "take 1は除外し、同一試行のtake 2を採用する。",
+      "replacement_recording": "recording_023",
+      "replacement_source_svo_sha256": "e77f89371607376a4c0a48e7de3b36f7a8ff3ab4e3e2efd4bea043cdbbaea16c"
+    },
+    {
+      "group": 7,
+      "recording": "recording_007",
+      "source_svo_sha256": "ec3de1ced76a3ace7316266718b00a365fded7433b397ddba55e88c5a0d576c9",
+      "trial": 7,
+      "reason": "実験者によると被験者が指示を間違えたため、この録画を解析に使用しない。",
+      "replacement_recording": null
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 import argparse
 from pathlib import Path
 from corridor_tracking.trusted_depth_10m import OUT, SHARE, TAG, load_context, process, save_report
+from corridor_tracking.analysis_exclusions import excluded, load_exclusions
 
 
 def main():
@@ -17,8 +18,9 @@ def main():
             records.append(process(root/completed.name,context,a.output_root))
         except (OSError,ValueError,KeyError,TypeError) as e:
             failures.append({'tag':completed.name,'error':str(e)})
-    save_report(records,failures,a.report)
-    print(f'Report: {a.report}; {len(records)} validated recordings; {len(failures)} failures.',flush=True)
+    exclusions=load_exclusions();included=[r for r in records if not excluded(r,exclusions)]
+    save_report(included,failures,a.report)
+    print(f'Report: {a.report}; {len(included)} included recordings; {len(records)-len(included)} excluded; {len(failures)} failures.',flush=True)
     return 1 if failures else 0
 
 

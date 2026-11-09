@@ -6,7 +6,7 @@ param(
     [switch]$Prepare
 )
 $ErrorActionPreference = 'Stop'
-$Stage = Join-Path $LocalRoot 'depth_group005_009_calibration_tools_20261107_02'
+$Stage = Join-Path $LocalRoot 'depth_group005_009_calibration_tools_20261107_03'
 $ManifestName = 'package_manifest.json'
 function Test-ToolPackage([string]$Folder) {
     $manifest = Get-Content -Raw -LiteralPath (Join-Path $Folder $ManifestName) | ConvertFrom-Json

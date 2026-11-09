@@ -40,6 +40,9 @@ def discover(root, groups):
             entry.update(status='ready' if len(cals) == 1 else 'calibration_missing_or_ambiguous',
                          svo_count=len(files), calibration_svos=[str(p) for p in cals],
                          recording_svos=[str(p) for p in files if not any(x.name.lower().startswith('calibration') for x in p.relative_to(directory).parents)])
+            if group == 5:
+                entry['status'] = 'uses_group4_calibration_operator_report'
+                entry['calibration_note'] = 'Operator says groups 4 and 5 use the same calibration; compare and verify existing group 4 candidate separately.'
             if group == 6:
                 take1 = directory / 'calibration_001'
                 entry['operator_reported_trial_1_svos'] = [str(p) for p in svo_files(take1)] if take1.is_dir() else []
@@ -51,8 +54,7 @@ def discover_group7_additional(root):
     # The separately recorded tests may live outside the group directory.
     tests = []
     for folder in root.rglob('*'):
-        if not folder.is_dir() or (folder.name.casefold() != '1106test' and
-                                   not re.fullmatch(r'\d{8}_test', folder.name, re.I)):
+        if not folder.is_dir() or folder.name.casefold() not in ('1106test', '20261106_test'):
             continue
         for trial, name in ((4, 'test1'), (5, 'test2')):
             test_number = trial - 3
@@ -117,14 +119,18 @@ def main():
     if not a.prepare:
         return 0
     package = Path(__file__).resolve().parents[1]
-    records, failed = [], []
+    records, failed, skipped = [], [], []
     for entry in entries:
+        if entry['status'] == 'uses_group4_calibration_operator_report':
+            skipped.append({'group': 5, 'reason': entry['status']})
+            print('[校正 G005] 実験者申告によりグループ４と共通。新規校正候補は作成しません。', flush=True)
+            continue
         try:
             records.append(prepare(entry, a.local_root, a.sdk_python, a.analysis_python, package, a.run_id))
         except (OSError, ValueError, subprocess.CalledProcessError) as exc:
             failed.append({'group': entry['group'], 'error': str(exc)})
             print(f'[校正エラー] G{entry["group"]:03d}: {exc}; 保存済みファイルは維持。', file=sys.stderr, flush=True)
-    print(json.dumps({'prepared': records, 'failed': failed,
+    print(json.dumps({'prepared': records, 'failed': failed, 'skipped': skipped,
                       'notice': '候補は暫定。共有や本解析への適用前に確認する。'}, ensure_ascii=False, indent=2), flush=True)
     return 1 if failed else 0
 

@@ -1,0 +1,245 @@
+{
+  "inputs_sha256": {
+    "/home/hp-ubuntu/kaiseki1103/inputs/追い越し実験_アンケート入力・途中終了対応.xlsx": "e7589d426dd9ddc048ad44636787702fe7635eaec9705fa1ae46a624b83be01e",
+    "/home/hp-ubuntu/pedestrian_sim/overtaking/behavior_results/features_per_role.csv": "f1d95b1778cb848e6891edf8972d28c6154cbad80d5c707dea2bf5a7cfc4eb87"
+  },
+  "survey_rows_with_any_answer_by_group": {
+    "G01": 86,
+    "G02": 102,
+    "G03": 102,
+    "G04": 68,
+    "G05": 102,
+    "G06": 112,
+    "G07": 112,
+    "G08": 102,
+    "G09": 112
+  },
+  "invalid_answer_cells": [],
+  "trajectory_role_rows": 64,
+  "joined_role_rows": 64,
+  "joined_recordings": 32,
+  "joined_by_group": {
+    "2": 6,
+    "3": 44,
+    "4": 2,
+    "5": 12
+  },
+  "failures": [],
+  "exploratory_correlations": [
+    {
+      "feature": "min_observed_point_distance_m",
+      "question": "Q5",
+      "role": "initially_trailing",
+      "group": "all",
+      "n_recordings": 32,
+      "spearman_rho": 0.18893862766639669
+    },
+    {
+      "feature": "min_observed_point_distance_m",
+      "question": "Q5",
+      "role": "initially_trailing",
+      "group": "3",
+      "n_recordings": 22,
+      "spearman_rho": 0.34143494917128614
+    },
+    {
+      "feature": "min_observed_point_distance_m",
+      "question": "Q5",
+      "role": "initially_leading",
+      "group": "all",
+      "n_recordings": 32,
+      "spearman_rho": 0.0691064723364019
+    },
+    {
+      "feature": "min_observed_point_distance_m",
+      "question": "Q5",
+      "role": "initially_leading",
+      "group": "3",
+      "n_recordings": 22,
+      "spearman_rho": -0.5558578762086546
+    },
+    {
+      "feature": "max_lateral_displacement_cross_window_m",
+      "question": "Q2",
+      "role": "initially_trailing",
+      "group": "all",
+      "n_recordings": 32,
+      "spearman_rho": 0.06174427608645253
+    },
+    {
+      "feature": "max_lateral_displacement_cross_window_m",
+      "question": "Q2",
+      "role": "initially_trailing",
+      "group": "3",
+      "n_recordings": 22,
+      "spearman_rho": -0.14272328199266324
+    },
+    {
+      "feature": "max_lateral_displacement_cross_window_m",
+      "question": "Q2",
+      "role": "initially_leading",
+      "group": "all",
+      "n_recordings": 32,
+      "spearman_rho": 0.05787101639657486
+    },
+    {
+      "feature": "max_lateral_displacement_cross_window_m",
+      "question": "Q2",
+      "role": "initially_leading",
+      "group": "3",
+      "n_recordings": 22,
+      "spearman_rho": 0.33884398145475986
+    },
+    {
+      "feature": "speed_drop_m_s",
+      "question": "Q6",
+      "role": "initially_trailing",
+      "group": "all",
+      "n_recordings": 32,
+      "spearman_rho": 0.2884152715740464
+    },
+    {
+      "feature": "speed_drop_m_s",
+      "question": "Q6",
+      "role": "initially_trailing",
+      "group": "3",
+      "n_recordings": 22,
+      "spearman_rho": 0.3423137943553651
+    },
+    {
+      "feature": "speed_drop_m_s",
+      "question": "Q6",
+      "role": "initially_leading",
+      "group": "all",
+      "n_recordings": 32,
+      "spearman_rho": -0.1233973554163333
+    },
+    {
+      "feature": "speed_drop_m_s",
+      "question": "Q6",
+      "role": "initially_leading",
+      "group": "3",
+      "n_recordings": 22,
+      "spearman_rho": 0.02837839133418454
+    }
+  ],
+  "distance_q5_sensitivity": [
+    {
+      "role": "initially_trailing",
+      "group": "all",
+      "variant": "exclude_high_jump",
+      "n_recordings": 30,
+      "rho": 0.16944063120154249
+    },
+    {
+      "role": "initially_trailing",
+      "group": "all",
+      "variant": "opposite_role",
+      "n_recordings": 32,
+      "rho": 0.0691064723364019
+    },
+    {
+      "role": "initially_trailing",
+      "group": "all",
+      "variant": "participant_1",
+      "n_recordings": 23,
+      "rho": 0.40031718317538656
+    },
+    {
+      "role": "initially_trailing",
+      "group": "all",
+      "variant": "participant_2",
+      "n_recordings": 9,
+      "rho": -0.5523398999523438
+    },
+    {
+      "role": "initially_trailing",
+      "group": "3",
+      "variant": "exclude_high_jump",
+      "n_recordings": 21,
+      "rho": 0.35777342374562254
+    },
+    {
+      "role": "initially_trailing",
+      "group": "3",
+      "variant": "opposite_role",
+      "n_recordings": 22,
+      "rho": -0.5558578762086546
+    },
+    {
+      "role": "initially_trailing",
+      "group": "3",
+      "variant": "participant_1",
+      "n_recordings": 14,
+      "rho": 0.4855216566027185
+    },
+    {
+      "role": "initially_trailing",
+      "group": "3",
+      "variant": "participant_2",
+      "n_recordings": 8,
+      "rho": -0.6173419725817378
+    },
+    {
+      "role": "initially_leading",
+      "group": "all",
+      "variant": "exclude_high_jump",
+      "n_recordings": 30,
+      "rho": 0.14086277688128188
+    },
+    {
+      "role": "initially_leading",
+      "group": "all",
+      "variant": "opposite_role",
+      "n_recordings": 32,
+      "rho": 0.18893862766639669
+    },
+    {
+      "role": "initially_leading",
+      "group": "all",
+      "variant": "participant_1",
+      "n_recordings": 9,
+      "rho": -0.06454972243679029
+    },
+    {
+      "role": "initially_leading",
+      "group": "all",
+      "variant": "participant_2",
+      "n_recordings": 23,
+      "rho": 0.2064506071972146
+    },
+    {
+      "role": "initially_leading",
+      "group": "3",
+      "variant": "exclude_high_jump",
+      "n_recordings": 21,
+      "rho": -0.5193448931983553
+    },
+    {
+      "role": "initially_leading",
+      "group": "3",
+      "variant": "opposite_role",
+      "n_recordings": 22,
+      "rho": 0.34143494917128614
+    },
+    {
+      "role": "initially_leading",
+      "group": "3",
+      "variant": "participant_1",
+      "n_recordings": 8,
+      "rho": -0.07715167498104596
+    },
+    {
+      "role": "initially_leading",
+      "group": "3",
+      "variant": "participant_2",
+      "n_recordings": 14,
+      "rho": -0.5831161291067328
+    }
+  ],
+  "limitations": [
+    "role mapping is unverified; no person ID ground truth",
+    "selection and point measurement are biased and provisional",
+    "all/group 3 correlations are descriptive, not independent participant inference"
+  ]
+}
